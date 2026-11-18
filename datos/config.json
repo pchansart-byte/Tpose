@@ -1,0 +1,185 @@
+{
+  "version": 2,
+  "lang": "es",
+  "mode": "timed",
+  "folders": [
+    {
+      "path": "D:\\referencias\\referencias normales\\armas armaduras",
+      "name": "armas armaduras",
+      "enabled": true
+    },
+    {
+      "path": "D:\\referencias\\referencias normales\\real",
+      "name": "real",
+      "enabled": true
+    }
+  ],
+  "plan": [
+    {
+      "count": 2,
+      "duration": 60
+    },
+    {
+      "count": 3,
+      "duration": 120
+    },
+    {
+      "count": 4,
+      "duration": 240
+    }
+  ],
+  "relaxed_count": 20,
+  "shuffle": true,
+  "grayscale": false,
+  "rotation": 0,
+  "warning_seconds": 10,
+  "interval_sound": true,
+  "show_timer": true,
+  "sound": true,
+  "session_seq": 10,
+  "image_usage": {
+    "D:\\referencias\\clued\\GxVt4MxbwAAqpVS.jpeg": 1,
+    "D:\\referencias\\oral\\GUfQvnnbcAAPxur.jpeg": 1,
+    "D:\\referencias\\clued\\GxLmGdRaIAE6E6V.jpeg": 2,
+    "D:\\referencias\\clued\\GqrWwAPXYAAt84m.jpeg": 2,
+    "D:\\referencias\\oral\\GstuS4nXYAAiQ4i.jpg": 2,
+    "D:\\referencias\\oral\\photo_5111820074149940611_w.jpg": 2,
+    "D:\\referencias\\oral\\FlgdaJnX0AAiuOL.jpg": 2,
+    "D:\\referencias\\clued\\F4kvgouagAAHe2h.jpeg": 2,
+    "D:\\referencias\\clued\\HKxj6m5aMAAI2I7.jpg": 2,
+    "D:\\referencias\\oral\\HJ4bKuPXoAAl3bY.jpg": 2,
+    "D:\\referencias\\oral\\photo_42_2025-08-20_19-35-56.jpg": 2,
+    "D:\\referencias\\clued\\HK0DSVBXQAAjeLC.jpg": 2,
+    "D:\\referencias\\clued\\Captura de pantalla 2024-12-05 145546.png": 3,
+    "D:\\referencias\\oral\\photo_15_2025-08-20_19-27-11.jpg": 4,
+    "D:\\referencias\\clued\\HNSHiT2WgAAVwy_.jpg": 4,
+    "D:\\referencias\\clued\\GlRMqSxXcAAg_zA.jpeg": 4,
+    "D:\\referencias\\oral\\GsDW1JRXwAAL0D0.jpg": 5,
+    "D:\\referencias\\oral\\G0w1SeXakAEF1j4.jpg": 5,
+    "D:\\referencias\\clued\\G6H7dtlXEAA1Wrq.jpg": 5,
+    "D:\\referencias\\oral\\GOZWyBUWsAA8jrF.jpeg": 5,
+    "D:\\referencias\\clued\\GwjbGxlWwAACfE0.jpeg": 6,
+    "D:\\referencias\\oral\\GyVxSB6WgAIpEo6.jpeg": 6,
+    "D:\\referencias\\oral\\photo_5053471182497188870_y.jpg": 6,
+    "D:\\referencias\\oral\\G51r7p7XUAATqbS.jpeg": 6,
+    "D:\\referencias\\oral\\photo_73_2025-08-20_19-26-30.jpg": 6,
+    "D:\\referencias\\clued\\G1_dPlba8AEB8oQ.jpeg": 6,
+    "D:\\referencias\\referencias normales\\real\\03.jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\a (27).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (20).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\06abf7e48a1548631fc2445d59d2c2dd.jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (25).png": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (26).png": 7,
+    "D:\\referencias\\referencias normales\\real\\02.jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\a (5).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (36).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (25).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\3c76dd3065fb699039a153a059563c70.jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\a (12).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (2).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (44).jpg": 7,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (62).jpg": 7,
+    "D:\\referencias\\referencias normales\\armas armaduras\\HFi4h6pakAMu6_6.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\04.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\HFkSzSMW8AAcfHI.png": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\a (17).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\8d4551c4f6f7d30c4f3103f8368c8dd0.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\grupo1 (42).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\grupo1 (53).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\a (50).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\HFb7u59W4AATCw_.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\G9P3WuZXQAIXeym.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\450551637_897746719058884_8182497544727058318_n.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\G-PXonvXwAAx_1l.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\a (14).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\G9P3WqzWAAEGVnT.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\a (10).jpg": 8,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (33).jpg": 9,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (4).png": 9,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (56).jpg": 9,
+    "D:\\referencias\\referencias normales\\real\\2ba9e1ff5c88e6e32fdeaba833ce2f4d.jpg": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (58).jpg": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (7).png": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (15).png": 10,
+    "D:\\referencias\\referencias normales\\real\\a (22).jpg": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (23).png": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (9).png": 10,
+    "D:\\referencias\\referencias normales\\real\\grupo1 (24).png": 10,
+    "D:\\referencias\\referencias normales\\real\\01.jpg": 10
+  },
+  "history": [
+    {
+      "date": "2026-11-17T20:28:11-05:00",
+      "mode": "timed",
+      "folders": [
+        "armas armaduras",
+        "real"
+      ],
+      "plan": [
+        {
+          "count": 2,
+          "duration": 60
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 9,
+      "total_seconds": 22,
+      "planned_seconds": 1440,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T20:27:24-05:00",
+      "mode": "timed",
+      "folders": [
+        "armas armaduras",
+        "real"
+      ],
+      "plan": [
+        {
+          "count": 2,
+          "duration": 60
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 3,
+      "total_seconds": 170,
+      "planned_seconds": 1440,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T19:00:44-05:00",
+      "mode": "timed",
+      "folders": [
+        "armas armaduras"
+      ],
+      "plan": [
+        {
+          "count": 10,
+          "duration": 30
+        },
+        {
+          "count": 5,
+          "duration": 60
+        }
+      ],
+      "poses": 15,
+      "total_seconds": 18,
+      "planned_seconds": 600,
+      "completed": false
+    }
+  ]
+}
