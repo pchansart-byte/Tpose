@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import sys
 from datetime import datetime
 
 # Light editorial palette for the studio.
@@ -45,7 +46,46 @@ SANS = "Segoe UI"
 SERIF = "Georgia"
 
 
-def font(size: int, weight: str = "normal", family: str = SANS, italic: bool = False):
+def _pick_font(candidates: list[str]) -> str:
+    try:
+        import tkinter.font as tkfont
+        from tkinter import _default_root
+
+        if _default_root is not None:
+            available = {name.lower(): name for name in tkfont.families(_default_root)}
+            for candidate in candidates:
+                if candidate.lower() in available:
+                    return available[candidate.lower()]
+    except Exception:
+        pass
+    return candidates[0]
+
+
+def set_language_font(lang: str) -> None:
+    global SANS, SERIF
+    if lang == "zh":
+        SANS = _pick_font([
+            "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans CJK SC",
+            "WenQuanYi Zen Hei", "Arial Unicode MS", "DejaVu Sans",
+        ])
+        SERIF = _pick_font([
+            "SimSun", "Noto Serif CJK SC", "Songti SC", "DejaVu Serif",
+        ])
+    elif lang == "ja":
+        SANS = _pick_font([
+            "Yu Gothic UI", "Yu Gothic", "Meiryo UI", "Meiryo",
+            "Noto Sans CJK JP", "TakaoPGothic", "DejaVu Sans",
+        ])
+        SERIF = _pick_font([
+            "Yu Mincho", "Noto Serif CJK JP", "MS Mincho", "DejaVu Serif",
+        ])
+    else:
+        SANS = _pick_font(["Segoe UI", "DejaVu Sans", "Arial"])
+        SERIF = _pick_font(["Georgia", "DejaVu Serif", "Times New Roman"])
+
+
+def font(size: int, weight: str = "normal", family: str | None = None, italic: bool = False):
+    family = family or SANS
     style = ""
     if weight and weight != "normal":
         style = weight
@@ -94,8 +134,18 @@ def fmt_short_duration(seconds: int, lang: str = "es") -> str:
     return f"{h} h {m:02d} min"
 
 
-def fmt_chip_duration(seconds: int) -> str:
+def fmt_chip_duration(seconds: int, lang: str = "es") -> str:
     s = int(seconds)
+    if lang == "zh":
+        if s < 60:
+            return f"{s} 秒"
+        if s % 60 == 0:
+            return f"{s // 60} 分"
+    elif lang == "ja":
+        if s < 60:
+            return f"{s} 秒"
+        if s % 60 == 0:
+            return f"{s // 60} 分"
     if s < 60:
         return f"{s} s"
     if s % 60 == 0:
@@ -106,6 +156,28 @@ def fmt_chip_duration(seconds: int) -> str:
 
 def fmt_total(seconds: float, lang: str = "es") -> str:
     s = max(0, int(round(seconds)))
+    if lang == "zh":
+        if s < 60:
+            return f"{s} 秒"
+        m, sec = divmod(s, 60)
+        if m < 60:
+            return f"{m} 分" if sec == 0 else f"{m} 分 {sec:02d} 秒"
+        h, m = divmod(m, 60)
+        sec = s % 60
+        if sec:
+            return f"{h} 小时 {m:02d} 分 {sec:02d} 秒"
+        return f"{h} 小时 {m:02d} 分" if m else f"{h} 小时"
+    if lang == "ja":
+        if s < 60:
+            return f"{s} 秒"
+        m, sec = divmod(s, 60)
+        if m < 60:
+            return f"{m} 分" if sec == 0 else f"{m} 分 {sec:02d} 秒"
+        h, m = divmod(m, 60)
+        sec = s % 60
+        if sec:
+            return f"{h} 時間 {m:02d} 分 {sec:02d} 秒"
+        return f"{h} 時間 {m:02d} 分" if m else f"{h} 時間"
     if s < 60:
         return f"{s} s"
     m, sec = divmod(s, 60)
@@ -125,6 +197,10 @@ def fmt_total(seconds: float, lang: str = "es") -> str:
 def fmt_hours_minutes(seconds: float, lang: str = "es") -> tuple[str, str]:
     """Return a large value and a small unit label for stat cards."""
     s = max(0, int(round(seconds)))
+    if lang == "zh":
+        return (str(s // 60), "分") if s < 3600 else (f"{s / 3600:.1f}", "小时")
+    if lang == "ja":
+        return (str(s // 60), "分") if s < 3600 else (f"{s / 3600:.1f}", "時間")
     if s < 3600:
         return (str(s // 60), "min")
     h = s / 3600
@@ -136,6 +212,8 @@ def fmt_hours_minutes(seconds: float, lang: str = "es") -> tuple[str, str]:
 MONTHS = {
     "es": ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
     "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "zh": [f"{n}月" for n in range(1, 13)],
+    "ja": [f"{n}月" for n in range(1, 13)],
 }
 
 
@@ -145,7 +223,15 @@ def fmt_date(iso: str, lang: str = "es", with_time: bool = True) -> str:
     except (ValueError, TypeError):
         return ""
     months = MONTHS.get(lang, MONTHS["es"])
-    if lang == "en":
+    if lang == "zh":
+        date = f"{dt.year}年{months[dt.month - 1]}{dt.day}日"
+        if with_time:
+            date += f" · {dt.strftime('%H:%M')}"
+    elif lang == "ja":
+        date = f"{dt.year}年{months[dt.month - 1]}{dt.day}日"
+        if with_time:
+            date += f" · {dt.strftime('%H:%M')}"
+    elif lang == "en":
         date = f"{months[dt.month - 1]} {dt.day}, {dt.year}"
         if with_time:
             date += f" · {dt.strftime('%I:%M %p').lstrip('0')}"
@@ -161,12 +247,20 @@ def fmt_int(n: int | float) -> str:
 
 
 def poses_label(n: int, lang: str = "es") -> str:
+    if lang == "zh":
+        return f"{n} 张图片"
+    if lang == "ja":
+        return f"{n} 枚の画像"
     if n == 1:
         return "1 pose"
     return f"{n} poses"
 
 
 def images_label(n: int, lang: str = "es") -> str:
+    if lang == "zh":
+        return f"{n} 张图片"
+    if lang == "ja":
+        return f"{n} 枚の画像"
     if n == 1:
         return "1 imagen" if lang == "es" else "1 image"
     return f"{n} imágenes" if lang == "es" else f"{n} images"

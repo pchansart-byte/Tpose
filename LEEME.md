@@ -56,8 +56,8 @@ copia la carpeta completa.
 - **Borrar todo el historial** cuando quieras.
 - **Exportar las estadísticas como imagen PNG** o como **Excel (.xlsx)**.
 
-### Español e inglés
-Cambia el idioma desde la barra lateral, antes de empezar la sesión.
+### Español, English, 中文 y 日本語
+Cambia el idioma desde la barra lateral, antes de empezar la sesión. Chino y japonés aparecen debajo de inglés y español respectivamente.
 
 ---
 
@@ -120,7 +120,7 @@ as you like — for example `10 × 5 min`, `5 × 2 min` and `2 × 10 s`.
 - Choose when the warning bell starts (5–30 seconds, in 5-second steps) and optionally
   hear a bell every 30 seconds.
 - History can be cleared, or exported as a **PNG** image or a real **.xlsx** workbook.
-- Spanish and English interface.
+- Spanish, English, Chinese and Japanese interface.
 - No installation, no account, no uploads.
 
 Run from source with `py -3 tpose.py` (Python 3.10+, Pillow), or double-click

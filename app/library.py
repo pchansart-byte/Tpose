@@ -152,7 +152,7 @@ def plan_label(plan: list[dict], lang: str = "es") -> str:
     for block in plan[:4]:
         count = int(block.get("count", 0))
         duration = int(block.get("duration", 0))
-        parts.append(f"{count}×{T.fmt_chip_duration(duration)}")
+        parts.append(f"{count}×{T.fmt_chip_duration(duration, lang)}")
     if len(plan) > 4:
         parts.append("…")
     return " · ".join(parts)

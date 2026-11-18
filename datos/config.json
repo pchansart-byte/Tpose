@@ -4,20 +4,15 @@
   "mode": "timed",
   "folders": [
     {
-      "path": "D:\\referencias\\referencias normales\\armas armaduras",
-      "name": "armas armaduras",
-      "enabled": true
-    },
-    {
-      "path": "D:\\referencias\\referencias normales\\real",
-      "name": "real",
+      "path": "D:\\referencias\\Thicc",
+      "name": "Thicc",
       "enabled": true
     }
   ],
   "plan": [
     {
-      "count": 2,
-      "duration": 60
+      "count": 500,
+      "duration": 10
     },
     {
       "count": 3,
@@ -36,7 +31,7 @@
   "interval_sound": true,
   "show_timer": true,
   "sound": true,
-  "session_seq": 10,
+  "session_seq": 14,
   "image_usage": {
     "D:\\referencias\\clued\\GxVt4MxbwAAqpVS.jpeg": 1,
     "D:\\referencias\\oral\\GUfQvnnbcAAPxur.jpeg": 1,
@@ -105,9 +100,166 @@
     "D:\\referencias\\referencias normales\\real\\grupo1 (23).png": 10,
     "D:\\referencias\\referencias normales\\real\\grupo1 (9).png": 10,
     "D:\\referencias\\referencias normales\\real\\grupo1 (24).png": 10,
-    "D:\\referencias\\referencias normales\\real\\01.jpg": 10
+    "D:\\referencias\\referencias normales\\real\\01.jpg": 10,
+    "D:\\referencias\\Thicc\\photo_3_2025-08-20_19-23-51.jpg": 11,
+    "D:\\referencias\\Thicc\\G89i-xkX0AAPJ-I.jpg": 12,
+    "D:\\referencias\\Thicc\\HCBpFqfWwAE3MnP.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_5163733257957346540_y.jpg": 12,
+    "D:\\referencias\\Thicc\\HB-hZA1aMAMKkeb.jpg": 12,
+    "D:\\referencias\\Thicc\\G_duBtcWQAAsJxR.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_35_2025-08-20_19-37-09.jpg": 12,
+    "D:\\referencias\\Thicc\\HNkLJtOakAA4HYR.jpg": 12,
+    "D:\\referencias\\Thicc\\876350c3-8212-467a-bc2c-ff550e3567ae.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_5163733257957346523_y.jpg": 12,
+    "D:\\referencias\\Thicc\\G2BvOBwW0AA6gkc.jpeg": 12,
+    "D:\\referencias\\Thicc\\photo_22_2024-08-02_00-10-34.jpg": 12,
+    "D:\\referencias\\Thicc\\GWtqVSmWAAAYz5A.jpeg": 12,
+    "D:\\referencias\\Thicc\\HSezWEzXAAAEq2P.jpg": 12,
+    "D:\\referencias\\Thicc\\G0KPK-GXMAAuyG2.jpeg": 12,
+    "D:\\referencias\\Thicc\\HG4IdXfXEAAePJ5.jpg": 12,
+    "D:\\referencias\\Thicc\\HRE4MDCXMAAb738.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_21_2025-08-20_19-35-56.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_17_2025-08-20_19-26-30.jpg": 12,
+    "D:\\referencias\\Thicc\\HEuVrBUXYAAS52U.jpg": 12,
+    "D:\\referencias\\Thicc\\G6Zwl2faUAAf6pW.jpeg": 12,
+    "D:\\referencias\\Thicc\\HL6i7M4aUAAM2Vz.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_11_2025-08-20_19-31-21.jpg": 12,
+    "D:\\referencias\\Thicc\\G8aH84bWgAAzIQR.jpeg": 12,
+    "D:\\referencias\\Thicc\\GSSby0aagAIIJBm.jpeg": 12,
+    "D:\\referencias\\Thicc\\FMH7zAAWQAIFKig.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_17_2025-08-20_19-25-42.jpg": 12,
+    "D:\\referencias\\Thicc\\HHNJAqWWEAEwGDo.jpg": 12,
+    "D:\\referencias\\Thicc\\399578522_1826114424499184_7620688295777123826_n.jpg": 12,
+    "D:\\referencias\\Thicc\\GljKi48W4AAH1AZ.png": 12,
+    "D:\\referencias\\Thicc\\photo_16_2024-08-02_00-15-47.jpg": 12,
+    "D:\\referencias\\Thicc\\HSpJ77IbIAAfWfg.jpg": 12,
+    "D:\\referencias\\Thicc\\G2f4f0sWwAABxp3.jpeg": 12,
+    "D:\\referencias\\Thicc\\G1NoY1kbsAA0R1G.jpeg": 12,
+    "D:\\referencias\\Thicc\\HLQJ1URWUAA8l_f.jpg": 12,
+    "D:\\referencias\\Thicc\\HNATrBgWIAAfgWL.jpg": 12,
+    "D:\\referencias\\Thicc\\HR_SopuWMAQHa4m.jpg": 12,
+    "D:\\referencias\\Thicc\\G8f18zRWsAAdwTz.jpg": 12,
+    "D:\\referencias\\Thicc\\HOVLz0IW4AAjudY.jpg": 12,
+    "D:\\referencias\\Thicc\\G1AmJoObQAEqyxP.jpeg": 12,
+    "D:\\referencias\\Thicc\\HH-H0E-agAIzY46.jpg": 12,
+    "D:\\referencias\\Thicc\\photo_5141090035754011588_y.jpg": 12,
+    "D:\\referencias\\Thicc\\HKecSO7XkAAA195.jpg": 12,
+    "D:\\referencias\\Thicc\\GsKFAjyb0AAf1dt.jpg": 12,
+    "D:\\referencias\\Thicc\\HVGcTYwXYAEmeMG.jpg": 12,
+    "D:\\referencias\\Thicc\\G1iX46QaMAEDiLj.jpg": 12,
+    "D:\\referencias\\Thicc\\a (6).jpeg": 13,
+    "D:\\referencias\\Thicc\\HNCm4CsXsAA1-da.jpg": 13,
+    "D:\\referencias\\Thicc\\HHr8RkDXUAI2Nyj.jpg": 13,
+    "D:\\referencias\\Thicc\\photo_4947725638810930376_y.jpg": 13,
+    "D:\\referencias\\Thicc\\HBvGB4VWYAA43sm.jpg": 13,
+    "D:\\referencias\\Thicc\\photo_53_2025-08-20_19-34-04.jpg": 13,
+    "D:\\referencias\\Thicc\\photo_21_2024-08-02_00-15-47.jpg": 13,
+    "D:\\referencias\\Thicc\\G2QrcxGWQAAApSQ.jpg": 13,
+    "D:\\referencias\\Thicc\\photo_4947725638810930396_y.jpg": 14,
+    "D:\\referencias\\Thicc\\HQd0mcfXoAAAwYK.jpg": 14,
+    "D:\\referencias\\Thicc\\F0Ncj7OWIAoJRGD.jpg": 14
   },
   "history": [
+    {
+      "date": "2026-11-17T21:31:12-05:00",
+      "mode": "timed",
+      "folders": [
+        "Thicc"
+      ],
+      "plan": [
+        {
+          "count": 500,
+          "duration": 10
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 3,
+      "total_seconds": 21,
+      "planned_seconds": 6320,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T21:28:34-05:00",
+      "mode": "timed",
+      "folders": [
+        "Thicc"
+      ],
+      "plan": [
+        {
+          "count": 500,
+          "duration": 10
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 8,
+      "total_seconds": 57,
+      "planned_seconds": 6320,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T21:27:24-05:00",
+      "mode": "timed",
+      "folders": [
+        "Thicc"
+      ],
+      "plan": [
+        {
+          "count": 500,
+          "duration": 10
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 45,
+      "total_seconds": 14,
+      "planned_seconds": 6320,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T21:26:48-05:00",
+      "mode": "timed",
+      "folders": [
+        "Thicc"
+      ],
+      "plan": [
+        {
+          "count": 500,
+          "duration": 10
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 1,
+      "total_seconds": 7,
+      "planned_seconds": 6320,
+      "completed": false
+    },
     {
       "date": "2026-11-17T20:28:11-05:00",
       "mode": "timed",

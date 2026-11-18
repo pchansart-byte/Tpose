@@ -21,7 +21,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Tpose — gesture drawing studio")
     parser.add_argument("--self-test", action="store_true", help="smoke-test the app and exit")
     parser.add_argument("--page", default=None, choices=["practice", "history", "about"])
-    parser.add_argument("--lang", default=None, choices=["es", "en"])
+    parser.add_argument("--lang", default=None, choices=["es", "en", "zh", "ja"])
     args = parser.parse_args()
 
     from app.application import TposeApp, enable_windows_dpi

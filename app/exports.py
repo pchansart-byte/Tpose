@@ -37,21 +37,52 @@ def week_data(history: list[dict]) -> list[tuple]:
     return [(day, secs, keys[day.weekday()]) for day, secs in sorted(days.items())]
 
 
+_FONT_LANG = "es"
+
+
 def _font(size: int, bold: bool = False, serif: bool = False):
     names = []
-    if serif:
+    if _FONT_LANG == "zh":
+        if serif:
+            names = ["simsun.ttc", "NotoSerifCJK-Regular.ttc", "NotoSerifCJKsc-Regular.otf"]
+        elif bold:
+            names = ["msyhbd.ttc", "msyhbd.ttf", "simhei.ttf", "NotoSansCJK-Bold.ttc"]
+        else:
+            names = ["msyh.ttc", "msyh.ttf", "simhei.ttf", "NotoSansCJK-Regular.ttc",
+                     "NotoSansCJKsc-Regular.otf"]
+    elif _FONT_LANG == "ja":
+        if serif:
+            names = ["yumin.ttf", "msmincho.ttc", "NotoSerifCJK-Regular.ttc",
+                     "NotoSerifCJKjp-Regular.otf"]
+        elif bold:
+            names = ["YuGothB.ttc", "meiryob.ttc", "msgothic.ttc", "NotoSansCJK-Bold.ttc"]
+        else:
+            names = ["YuGothR.ttc", "meiryo.ttc", "msgothic.ttc",
+                     "NotoSansCJK-Regular.ttc", "NotoSansCJKjp-Regular.otf"]
+    elif serif:
         names = ["georgiab.ttf", "georgia.ttf"]
     elif bold:
         names = ["seguisb.ttf", "segoeuib.ttf", "arialbd.ttf"]
     else:
         names = ["segoeui.ttf", "arial.ttf"]
-    for name in names:
-        path = Path(r"C:\Windows\Fonts") / name
-        if path.exists():
-            try:
-                return ImageFont.truetype(str(path), size)
-            except OSError:
-                pass
+    dirs = [
+        Path(r"C:\Windows\Fonts"),
+        Path("/usr/share/fonts/truetype/noto"),
+        Path("/usr/share/fonts/opentype/noto"),
+        Path("/usr/share/fonts/truetype/dejavu"),
+        Path("/usr/share/fonts/truetype/liberation"),
+    ]
+    for folder in dirs:
+        for name in names:
+            path = folder / name
+            if path.exists():
+                try:
+                    return ImageFont.truetype(str(path), size)
+                except OSError:
+                    pass
+    if serif:
+        # Japanese serif files are not always installed under the names above.
+        return _font(size, bold, False)
     return ImageFont.load_default()
 
 
@@ -63,6 +94,8 @@ def _plan_text(item: dict, lang: str) -> str:
 
 
 def export_png(path: str | Path, history: list[dict], lang: str = "es") -> None:
+    global _FONT_LANG
+    _FONT_LANG = lang
     s = summary(history)
     week = week_data(history)
     W, H = 1600, 1120
@@ -163,13 +196,15 @@ def export_xlsx(path: str | Path, history: list[dict], lang: str = "es") -> None
     soft = "FAEAE4"
     line = Side(style="thin", color="DDD0C0")
     border = Border(left=line, right=line, top=line, bottom=line)
-    title_font = Font(name="Georgia", size=24, bold=True, color="FFFFFF")
-    subtitle_font = Font(name="Calibri", size=11, color="FFFFFF")
-    h1_font = Font(name="Calibri", size=13, bold=True, color=ink)
-    h2_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
-    body_font = Font(name="Calibri", size=10, color=ink)
-    muted_font = Font(name="Calibri", size=10, color=muted)
-    big_font = Font(name="Georgia", size=15, bold=True, color=ink)
+    ui_font = "Microsoft YaHei" if lang == "zh" else ("Yu Gothic" if lang == "ja" else "Calibri")
+    serif_font = "SimSun" if lang == "zh" else ("Yu Mincho" if lang == "ja" else "Georgia")
+    title_font = Font(name=serif_font, size=24, bold=True, color="FFFFFF")
+    subtitle_font = Font(name=ui_font, size=11, color="FFFFFF")
+    h1_font = Font(name=ui_font, size=13, bold=True, color=ink)
+    h2_font = Font(name=ui_font, size=11, bold=True, color="FFFFFF")
+    body_font = Font(name=ui_font, size=10, color=ink)
+    muted_font = Font(name=ui_font, size=10, color=muted)
+    big_font = Font(name=serif_font, size=15, bold=True, color=ink)
     header_fill = PatternFill("solid", fgColor=accent)
     soft_fill = PatternFill("solid", fgColor=soft)
     card_fill = PatternFill("solid", fgColor=card)

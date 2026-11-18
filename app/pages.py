@@ -102,7 +102,11 @@ class SetupPage(Page):
                  font=T.font(9), justify="left", anchor="w", wraplength=620).pack(anchor="w")
         date = datetime.now()
         months = T.MONTHS.get(self.lang, T.MONTHS["es"])
-        tk.Label(header, text=f"{date.day:02d}  {months[date.month - 1].upper()}",
+        if self.lang in ("zh", "ja"):
+            date_text = f"{months[date.month - 1]}{date.day}日"
+        else:
+            date_text = f"{date.day:02d}  {months[date.month - 1].upper()}"
+        tk.Label(header, text=date_text,
                  bg=T.CREAM, fg=T.FAINT, font=T.font(8, "bold"), anchor="e").pack(
             side="right", padx=(18, 0), pady=(8, 0)
         )
@@ -358,7 +362,7 @@ class SetupPage(Page):
         line.pack(anchor="w")
         tk.Label(line, text=f"{count}", bg=T.CARD, fg=T.INK, font=T.font(11, "bold")).pack(side="left")
         unit = self.t("common.pose" if count == 1 else "common.poses")
-        tk.Label(line, text=f" {unit}  ×  {T.fmt_chip_duration(duration)}",
+        tk.Label(line, text=f" {unit}  ×  {T.fmt_chip_duration(duration, self.lang)}",
                  bg=T.CARD, fg=T.MUTED, font=T.font(9)).pack(side="left")
         tk.Label(text, text=f"{self.t('plan.block_total')}: {T.fmt_total(count * duration, self.lang)}",
                  bg=T.CARD, fg=T.FAINT, font=T.font(7), anchor="w").pack(anchor="w")

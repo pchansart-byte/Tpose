@@ -15,6 +15,7 @@ class BaseDialog(tk.Toplevel):
         super().__init__(parent)
         self.withdraw()
         self._parent = parent
+        self.lang = getattr(parent, "lang", "es")
         self._result = None
         self.overrideredirect(True)
         self.configure(bg=T.CARD)
@@ -209,7 +210,7 @@ class PlanBlockDialog(BaseDialog):
         )
         for seconds in (10, 30, 60, 120, 300, 600):
             CanvasButton(
-                presets, T.fmt_chip_duration(seconds),
+                presets, T.fmt_chip_duration(seconds, self.lang),
                 lambda s=seconds: self._set_duration(s),
                 variant="ghost", width=52, height=26, radius=7, font_size=7, padx=5,
             ).pack(side="left", padx=(0, 4))
@@ -267,7 +268,7 @@ class PlanBlockDialog(BaseDialog):
             return
         count, duration = values
         total = count * duration
-        self.total.configure(text=f"{count} × {T.fmt_chip_duration(duration)} = {T.fmt_total(total)}")
+        self.total.configure(text=f"{count} × {T.fmt_chip_duration(duration, self.lang)} = {T.fmt_total(total, self.lang)}")
 
     def _confirm(self):
         values = self._values()

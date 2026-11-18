@@ -14,7 +14,7 @@ from PIL import Image, ImageTk
 from . import theme as T
 from .art import Artwork
 from .dialogs import ConfirmDialog, MessageDialog
-from .i18n import tr
+from .i18n import LANGUAGES, tr
 from .library import scan_folder
 from .pages import AboutPage, HistoryPage, SetupPage
 from .session import SessionScreen
@@ -90,14 +90,19 @@ class Sidebar(tk.Frame):
         langs = tk.Frame(bottom, bg=T.SIDEBAR)
         langs.pack(anchor="w")
         self._lang_buttons = {}
-        for code in ("es", "en"):
-            b = CanvasButton(
-                langs, self.t(f"lang.{code}"), lambda c=code: self.app.set_language(c),
-                variant="sidebar", width=42, height=27, radius=6, font_size=7,
-                selected=self.app.lang == code, padx=6,
-            )
-            b.pack(side="left", padx=(0, 5))
-            self._lang_buttons[code] = b
+        # Two columns: Spanish/Japanese on the left, English/Chinese on the
+        # right. Chinese sits directly under English and Japanese under Spanish.
+        for codes in (("es", "ja"), ("en", "zh")):
+            column = tk.Frame(langs, bg=T.SIDEBAR)
+            column.pack(side="left", anchor="n", padx=(0, 5))
+            for code in codes:
+                b = CanvasButton(
+                    column, self.t(f"lang.{code}"), lambda c=code: self.app.set_language(c),
+                    variant="sidebar", width=50, height=25, radius=6, font_size=7,
+                    selected=self.app.lang == code, padx=5,
+                )
+                b.pack(fill="x", pady=(0, 3))
+                self._lang_buttons[code] = b
         tk.Label(bottom, text=self.t("brand.version", v=self.app.version), bg=T.SIDEBAR,
                  fg=T.SIDEBAR_MUTED, font=T.font(7), anchor="w").pack(anchor="w", pady=(14, 1))
         tk.Label(bottom, text=self.t("brand.footer"), bg=T.SIDEBAR, fg=T.SIDEBAR_MUTED,
@@ -117,6 +122,7 @@ class TposeApp:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.store = Store()
+        T.set_language_font(self.store.lang)
         self.art = Artwork()
         self.folder_cache: dict[str, list[Path]] = {}
         self.session: SessionScreen | None = None
@@ -270,8 +276,9 @@ class TposeApp:
         self.root.title(self.t("app.title"))
 
     def set_language(self, lang: str):
-        if lang not in ("es", "en") or lang == self.lang:
+        if lang not in LANGUAGES or lang == self.lang:
             return
+        T.set_language_font(lang)
         self.store.set("lang", lang)
         self.root.title(self.t("app.title"))
         if self.session is not None:
@@ -281,7 +288,8 @@ class TposeApp:
             self._build_shell()
 
     def toggle_language(self):
-        self.set_language("en" if self.lang == "es" else "es")
+        current = list(LANGUAGES).index(self.lang) if self.lang in LANGUAGES else 0
+        self.set_language(LANGUAGES[(current + 1) % len(LANGUAGES)])
 
     # -------------------------------------------------------------- helpers
     def folder_files(self, path: str) -> list[Path]:

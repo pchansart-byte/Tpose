@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from .i18n import LANGUAGES
+
 
 DEFAULT_PLAN = [
     {"count": 10, "duration": 30},
@@ -113,7 +115,7 @@ class Store:
         return data
 
     def _validate(self) -> None:
-        if self.data["lang"] not in ("es", "en"):
+        if self.data["lang"] not in LANGUAGES:
             self.data["lang"] = "es"
         if self.data["mode"] not in ("timed", "relaxed"):
             self.data["mode"] = "timed"
