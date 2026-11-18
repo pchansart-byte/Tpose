@@ -9,7 +9,7 @@ import sys
 import tkinter as tk
 from pathlib import Path
 
-from PIL import Image, ImageTk
+from PIL import Image, ImageGrab, ImageTk
 
 from . import theme as T
 from .art import Artwork
@@ -150,10 +150,20 @@ class TposeApp:
         self._shell_dirty = False
         self._toast_after = None
         self._toast_label = None
+        self._chrome_after = None
+        self._resize_overlay = None
+        self._resize_overlay_photo = None
+        self._resize_end_after = None
+        self._resize_last_size = None
+        self._resize_overlay_ready = False
         self._configure_root()
         self.root.report_callback_exception = self._report_exception
         self._build_shell()
         self.show_page("practice")
+        self._schedule_chrome(force=True, delay=0)
+        self._schedule_chrome(force=True, delay=350)
+        self.root.bind("<Configure>", self._on_root_configure, add="+")
+        self.root.after(700, self._enable_resize_overlay)
 
     # ------------------------------------------------------------------ root
     def _configure_root(self):
@@ -185,8 +195,7 @@ class TposeApp:
             self._dark_titlebar()
         except Exception:
             pass
-        self.root.after(250, self.ensure_window_chrome)
-        self.root.bind("<Map>", lambda e: self.root.after(120, self.ensure_window_chrome), add="+")
+        self.root.bind("<Map>", lambda e: self._schedule_chrome(force=True, delay=120), add="+")
 
     def _work_area(self, sw: int, sh: int):
         if not sys.platform.startswith("win"):
@@ -220,15 +229,113 @@ class TposeApp:
                 hwnd, attribute, ctypes.byref(value), ctypes.sizeof(value)
             )
 
-    def ensure_window_chrome(self):
+    # -------------------------------------------------------- resize curtain
+    def _enable_resize_overlay(self):
+        if self.root.winfo_exists():
+            self._resize_last_size = (self.root.winfo_width(), self.root.winfo_height())
+            self._resize_overlay_ready = True
+
+    def _on_root_configure(self, event):
+        if not self._resize_overlay_ready or event.widget is not self.root:
+            return
+        w, h = event.width, event.height
+        if w < 420 or h < 320:
+            return
+        if self._resize_last_size is None:
+            self._resize_last_size = (w, h)
+            return
+        if (w, h) == self._resize_last_size:
+            return
+        self._resize_last_size = (w, h)
+        if self._resize_overlay is None:
+            self._begin_resize_overlay()
+        if self._resize_end_after:
+            try:
+                self.root.after_cancel(self._resize_end_after)
+            except tk.TclError:
+                pass
+        self._resize_end_after = self.root.after(480, self._end_resize_overlay)
+
+    def _begin_resize_overlay(self):
+        if self._resize_overlay is not None:
+            return
+        try:
+            x = self.root.winfo_rootx()
+            y = self.root.winfo_rooty()
+            w = self.root.winfo_width()
+            h = self.root.winfo_height()
+            shot = ImageGrab.grab(bbox=(x, y, x + w, y + h), all_screens=True)
+            photo = ImageTk.PhotoImage(shot)
+        except Exception:
+            return
+        self._resize_overlay_photo = photo
+        if self.session is not None and self.session.winfo_exists():
+            self.session.pack_forget()
+        elif self.shell is not None and self.shell.winfo_exists():
+            self.shell.pack_forget()
+        label = tk.Label(
+            self.root, image=photo, bd=0,
+            bg=T.SESSION_BG if self.session is not None else T.CREAM,
+        )
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+        label.lift()
+        self._resize_overlay = label
+
+    def _end_resize_overlay(self):
+        self._resize_end_after = None
+        if self._resize_overlay is not None:
+            try:
+                self._resize_overlay.destroy()
+            except tk.TclError:
+                pass
+            self._resize_overlay = None
+        self._resize_overlay_photo = None
+        if self.session is not None and self.session.winfo_exists():
+            self.session.pack(fill="both", expand=True)
+            self.root.after(1, self.session._apply_resize)
+        elif self.shell is not None and self.shell.winfo_exists():
+            self.shell.pack(fill="both", expand=True)
+
+    def _pause_resize_overlay(self):
+        self._resize_overlay_ready = False
+        self._resize_last_size = None
+        if self._resize_overlay is not None:
+            try:
+                self._resize_overlay.destroy()
+            except tk.TclError:
+                pass
+            self._resize_overlay = None
+        self._resize_overlay_photo = None
+        if self._resize_end_after:
+            try:
+                self.root.after_cancel(self._resize_end_after)
+            except tk.TclError:
+                pass
+            self._resize_end_after = None
+        self.root.after(700, self._enable_resize_overlay)
+
+    def _schedule_chrome(self, force: bool = False, delay: int = 120):
+        if self._chrome_after:
+            try:
+                self.root.after_cancel(self._chrome_after)
+            except tk.TclError:
+                pass
+        self._chrome_after = self.root.after(delay, lambda: self.ensure_window_chrome(force))
+
+    def ensure_window_chrome(self, force: bool = False):
         """Restore caption buttons if a fullscreen transition dropped them."""
         if not sys.platform.startswith("win"):
             return
+        self._chrome_after = None
         try:
             if bool(self.root.attributes("-fullscreen")):
                 return
             if self.root.overrideredirect():
                 self.root.overrideredirect(False)
+            try:
+                self.root.attributes("-toolwindow", False)
+            except tk.TclError:
+                pass
             self.root.update_idletasks()
             user32 = ctypes.windll.user32
             user32.GetParent.argtypes = [ctypes.c_void_p]
@@ -245,13 +352,20 @@ class TposeApp:
             get_long.restype = ctypes.c_ssize_t
             set_long.restype = ctypes.c_ssize_t
             set_long.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_ssize_t]
+            changed = False
+            ex_style = get_long(hwnd, -20)  # GWL_EXSTYLE
+            if ex_style & 0x00000080:  # WS_EX_TOOLWINDOW hides caption buttons
+                set_long(hwnd, -20, ex_style & ~0x00000080)
+                changed = True
             style = get_long(hwnd, -16)  # GWL_STYLE
             required = 0x00020000 | 0x00010000 | 0x00080000 | 0x00C00000 | 0x00040000
-            if (style & required) == required:
-                return
-            style |= required
-            set_long(hwnd, -16, style)
-            user32.SetWindowPos(hwnd, 0, 0, 0, 0, 0, 0x0027)  # NOMOVE|NOSIZE|NOZORDER|FRAMECHANGED
+            if (style & required) != required or force:
+                set_long(hwnd, -16, style | required)
+                changed = True
+            if changed:
+                user32.SetWindowPos(
+                    hwnd, 0, 0, 0, 0, 0, 0x0027
+                )  # NOMOVE|NOSIZE|NOZORDER|FRAMECHANGED
         except Exception:
             pass
 
@@ -351,6 +465,7 @@ class TposeApp:
             MessageDialog(self.root, self.t("dialog.no_images_title"), self.t("dialog.no_images"),
                           self.t("common.ok"), icon="folder").show()
             return
+        self._pause_resize_overlay()
         if self.session is not None:
             self.session.destroy()
             self.session = None
@@ -361,6 +476,7 @@ class TposeApp:
         self.root.configure(cursor="")
 
     def leave_session(self, page: str = "practice"):
+        self._pause_resize_overlay()
         if self.session is not None:
             try:
                 self.session.destroy()
@@ -377,7 +493,7 @@ class TposeApp:
             self.root.attributes("-fullscreen", False)
         except tk.TclError:
             pass
-        self.root.after(80, self.ensure_window_chrome)
+        self._schedule_chrome(force=True, delay=80)
         self.root.configure(cursor="")
 
     def record_session(self, entry: dict):

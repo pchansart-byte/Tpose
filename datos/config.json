@@ -5,6 +5,11 @@
   "mode": "timed",
   "folders": [
     {
+      "path": "D:\\referencias\\referencias normales\\armas armaduras",
+      "name": "armas armaduras",
+      "enabled": true
+    },
+    {
       "path": "D:\\referencias\\referencias normales\\cuadros",
       "name": "cuadros",
       "enabled": true
@@ -12,19 +17,31 @@
   ],
   "plan": [
     {
-      "count": 5,
+      "count": 3,
+      "duration": 120
+    },
+    {
+      "count": 3,
       "duration": 60
+    },
+    {
+      "count": 3,
+      "duration": 30
+    },
+    {
+      "count": 3,
+      "duration": 20
     }
   ],
   "relaxed_count": 20,
   "shuffle": true,
   "grayscale": false,
   "rotation": 0,
-  "warning_seconds": 10,
+  "warning_seconds": 5,
   "interval_sound": true,
   "show_timer": true,
   "sound": true,
-  "session_seq": 17,
+  "session_seq": 31,
   "image_usage": {
     "D:\\referencias\\clued\\GxVt4MxbwAAqpVS.jpeg": 1,
     "D:\\referencias\\oral\\GUfQvnnbcAAPxur.jpeg": 1,
@@ -73,15 +90,15 @@
     "D:\\referencias\\referencias normales\\armas armaduras\\a (17).jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\8d4551c4f6f7d30c4f3103f8368c8dd0.jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\grupo1 (42).jpg": 8,
-    "D:\\referencias\\referencias normales\\armas armaduras\\grupo1 (53).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\grupo1 (53).jpg": 31,
     "D:\\referencias\\referencias normales\\armas armaduras\\a (50).jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\HFb7u59W4AATCw_.jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\G9P3WuZXQAIXeym.jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\450551637_897746719058884_8182497544727058318_n.jpg": 8,
-    "D:\\referencias\\referencias normales\\armas armaduras\\G-PXonvXwAAx_1l.jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\G-PXonvXwAAx_1l.jpg": 31,
     "D:\\referencias\\referencias normales\\armas armaduras\\a (14).jpg": 8,
     "D:\\referencias\\referencias normales\\armas armaduras\\G9P3WqzWAAEGVnT.jpg": 8,
-    "D:\\referencias\\referencias normales\\armas armaduras\\a (10).jpg": 8,
+    "D:\\referencias\\referencias normales\\armas armaduras\\a (10).jpg": 31,
     "D:\\referencias\\referencias normales\\real\\grupo1 (33).jpg": 9,
     "D:\\referencias\\referencias normales\\real\\grupo1 (4).png": 9,
     "D:\\referencias\\referencias normales\\real\\grupo1 (56).jpg": 9,
@@ -156,241 +173,61 @@
     "D:\\referencias\\Thicc\\HMBt_B0XQAAfm8o.jpg": 15,
     "D:\\referencias\\Thicc\\G-hryEsW4AAHt0K.jpg": 15,
     "D:\\referencias\\Thicc\\photo_12_2025-08-20_19-25-42.jpg": 15,
-    "D:\\referencias\\referencias normales\\cuadros\\eab7456126b30f218a02853f4cd4a64e.jpg": 16,
-    "D:\\referencias\\referencias normales\\cuadros\\HHXFbvRawAAcaXC.jpg": 16,
-    "D:\\referencias\\referencias normales\\cuadros\\G9ND-IkWcAABfye.jpg": 17
+    "D:\\referencias\\referencias normales\\cuadros\\eab7456126b30f218a02853f4cd4a64e.jpg": 30,
+    "D:\\referencias\\referencias normales\\cuadros\\HHXFbvRawAAcaXC.jpg": 22,
+    "D:\\referencias\\referencias normales\\cuadros\\G9ND-IkWcAABfye.jpg": 17,
+    "D:\\referencias\\oral\\photo_66_2025-08-20_19-26-30.jpg": 18,
+    "D:\\referencias\\oral\\photo_15_2025-08-20_19-34-04.jpg": 19,
+    "D:\\referencias\\oral\\GrwxtuiXIAA_n3q.jpg": 20,
+    "D:\\referencias\\oral\\photo_5069192652586159232_y.jpg": 21,
+    "D:\\referencias\\referencias normales\\cuadros\\Gustav_Klimt_010.jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\G7jlLGwaIAAwg-X.jpg": 24,
+    "D:\\referencias\\referencias normales\\cuadros\\grupo1 (43).jpg": 30,
+    "D:\\referencias\\referencias normales\\cuadros\\HFmv-pubMAAkxkA.jpg": 26,
+    "D:\\referencias\\referencias normales\\cuadros\\HGO80VhWsAADt5x.png": 27,
+    "D:\\referencias\\referencias normales\\cuadros\\a (3).jpeg": 28,
+    "D:\\referencias\\referencias normales\\cuadros\\GLfji7aWQAAg-ou.jpeg": 29,
+    "D:\\referencias\\referencias normales\\cuadros\\HHW5bn2aEAAGz0s.png": 30,
+    "D:\\referencias\\referencias normales\\cuadros\\bf8e8e3c3a4dcc4a2763fba650284e07.jpg": 30,
+    "D:\\referencias\\referencias normales\\cuadros\\HFTQuHza8AAOp7L.jpg": 30,
+    "D:\\referencias\\referencias normales\\cuadros\\Fny2dbIWIAAcLPY.jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\HFh5bIwXsAAoqqJ.jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\G5bn1VUXgAAiVbb.jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\wallpaperflare.com_wallpaper.jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\grupo1 (52).jpg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\GO5OrbPXEAAG-_V.jpeg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\grupo1 (2).jpeg": 31,
+    "D:\\referencias\\referencias normales\\cuadros\\HHIcaMuW0AAbVsy.jpg": 31
   },
   "history": [
     {
-      "date": "2026-11-17T22:22:40-05:00",
+      "date": "2026-11-17T23:23:39-05:00",
       "mode": "timed",
       "folders": [
+        "armas armaduras",
         "cuadros"
       ],
       "plan": [
         {
-          "count": 5,
-          "duration": 60
-        }
-      ],
-      "poses": 1,
-      "total_seconds": 8,
-      "planned_seconds": 300,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T22:10:28-05:00",
-      "mode": "timed",
-      "folders": [
-        "cuadros"
-      ],
-      "plan": [
-        {
-          "count": 5,
-          "duration": 60
-        }
-      ],
-      "poses": 2,
-      "total_seconds": 60,
-      "planned_seconds": 300,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T21:57:57-05:00",
-      "mode": "timed",
-      "folders": [
-        "Thicc"
-      ],
-      "plan": [
-        {
-          "count": 500,
-          "duration": 10
-        },
-        {
           "count": 3,
           "duration": 120
         },
         {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 5,
-      "total_seconds": 19,
-      "planned_seconds": 6320,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T21:31:12-05:00",
-      "mode": "timed",
-      "folders": [
-        "Thicc"
-      ],
-      "plan": [
-        {
-          "count": 500,
-          "duration": 10
-        },
-        {
           "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 3,
-      "total_seconds": 21,
-      "planned_seconds": 6320,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T21:28:34-05:00",
-      "mode": "timed",
-      "folders": [
-        "Thicc"
-      ],
-      "plan": [
-        {
-          "count": 500,
-          "duration": 10
-        },
-        {
-          "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 8,
-      "total_seconds": 57,
-      "planned_seconds": 6320,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T21:27:24-05:00",
-      "mode": "timed",
-      "folders": [
-        "Thicc"
-      ],
-      "plan": [
-        {
-          "count": 500,
-          "duration": 10
-        },
-        {
-          "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 45,
-      "total_seconds": 14,
-      "planned_seconds": 6320,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T21:26:48-05:00",
-      "mode": "timed",
-      "folders": [
-        "Thicc"
-      ],
-      "plan": [
-        {
-          "count": 500,
-          "duration": 10
-        },
-        {
-          "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 1,
-      "total_seconds": 7,
-      "planned_seconds": 6320,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T20:28:11-05:00",
-      "mode": "timed",
-      "folders": [
-        "armas armaduras",
-        "real"
-      ],
-      "plan": [
-        {
-          "count": 2,
           "duration": 60
         },
         {
           "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 9,
-      "total_seconds": 22,
-      "planned_seconds": 1440,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T20:27:24-05:00",
-      "mode": "timed",
-      "folders": [
-        "armas armaduras",
-        "real"
-      ],
-      "plan": [
-        {
-          "count": 2,
-          "duration": 60
-        },
-        {
-          "count": 3,
-          "duration": 120
-        },
-        {
-          "count": 4,
-          "duration": 240
-        }
-      ],
-      "poses": 3,
-      "total_seconds": 170,
-      "planned_seconds": 1440,
-      "completed": false
-    },
-    {
-      "date": "2026-11-17T19:00:44-05:00",
-      "mode": "timed",
-      "folders": [
-        "armas armaduras"
-      ],
-      "plan": [
-        {
-          "count": 10,
           "duration": 30
         },
         {
-          "count": 5,
-          "duration": 60
+          "count": 3,
+          "duration": 20
         }
       ],
-      "poses": 15,
-      "total_seconds": 18,
-      "planned_seconds": 600,
+      "poses": 12,
+      "total_seconds": 98,
+      "planned_seconds": 690,
       "completed": false
     }
   ]

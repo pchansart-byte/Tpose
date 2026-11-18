@@ -265,6 +265,8 @@ class CanvasButton(tk.Canvas):
         self.bind("<FocusOut>", self._on_blur)
         self._pressed = False
         self._cw = self._min_width
+        self._configure_after = None
+        self._has_configured = False
         self.tooltip = Tooltip(self, tooltip) if tooltip else None
         self._draw()
 
@@ -274,7 +276,24 @@ class CanvasButton(tk.Canvas):
     def _on_configure(self, event):
         if event.width > 1:
             self._cw = event.width
-            self._draw()
+            if not self._has_configured:
+                self._has_configured = True
+                self._draw()
+                return
+            if self._configure_after:
+                try:
+                    self.after_cancel(self._configure_after)
+                except tk.TclError:
+                    pass
+            self._configure_after = self.after(700, self._deferred_draw)
+
+    def _deferred_draw(self):
+        self._configure_after = None
+        try:
+            if self.winfo_exists():
+                self._draw()
+        except tk.TclError:
+            pass
 
     def _on_enter(self, _event=None):
         self._hover = True
@@ -676,15 +695,43 @@ class ScrollFrame(tk.Frame):
         # Keep the slim scrollbar mounted. Showing/hiding it changes the
         # canvas width and used to cause layout oscillation on resize.
         self._visible = True
+        self._width_after = None
+        self._pending_width = 0
+        self._has_width = False
         self._bind_wheel(self)
         self._bind_wheel(self.body)
+        self.bind("<Destroy>", self._on_destroy, add="+")
 
     def _on_body(self, _event=None):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def _on_canvas(self, event):
-        if event.width > 2:
-            self.canvas.itemconfigure(self._window, width=event.width)
+        # Reflowing a full page of widgets on every pixel of a window drag is
+        # expensive. Remember the width and apply it once the drag pauses.
+        self._pending_width = event.width
+        if not self._has_width:
+            self._has_width = True
+            self._apply_canvas_width()
+            return
+        if self._width_after:
+            try:
+                self.after_cancel(self._width_after)
+            except tk.TclError:
+                pass
+        self._width_after = self.after(600, self._apply_canvas_width)
+
+    def _apply_canvas_width(self):
+        self._width_after = None
+        if self._pending_width > 2 and self.canvas.winfo_exists():
+            self.canvas.itemconfigure(self._window, width=self._pending_width)
+
+    def _on_destroy(self, _event=None):
+        if self._width_after:
+            try:
+                self.after_cancel(self._width_after)
+            except tk.TclError:
+                pass
+            self._width_after = None
 
     def _update_scrollbar(self):
         return

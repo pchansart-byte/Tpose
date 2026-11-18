@@ -227,7 +227,7 @@ class SessionScreen(tk.Frame):
         self.mode_label.pack(anchor="w")
 
         center = tk.Frame(self.top, bg=T.SESSION_PANEL)
-        center.grid(row=0, column=1)
+        center.place(relx=0.5, rely=0.5, anchor="center")
         self.timer_ring = TimerRing(center, T.SESSION_PANEL)
         self.no_timer = tk.Label(center, text=self._no_timer_caption(), bg=T.SESSION_PANEL,
                                  fg=T.SESSION_TEXT, font=T.font(9, "bold"))
@@ -612,7 +612,7 @@ class SessionScreen(tk.Frame):
                 self.after_cancel(self._resize_after)
             except tk.TclError:
                 pass
-        self._resize_after = self.after(160, self._apply_resize)
+        self._resize_after = self.after(600, self._apply_resize)
 
     def _apply_resize(self):
         self._resize_after = None
@@ -880,7 +880,7 @@ class SessionScreen(tk.Frame):
                     self.app.root.geometry(self._window_geom)
             except tk.TclError:
                 pass
-            self.after(100, self.app.ensure_window_chrome)
+            self.after(100, lambda: self.app.ensure_window_chrome(True))
         self._wake_cursor()
         self.after(140, self._render_current)
 
