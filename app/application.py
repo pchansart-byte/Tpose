@@ -87,8 +87,10 @@ class Sidebar(tk.Frame):
         tk.Frame(bottom, bg=T.SIDEBAR_LINE, height=1).pack(fill="x", pady=(0, 12))
         tk.Label(bottom, text="IDIOMA · LANGUAGE", bg=T.SIDEBAR, fg=T.SIDEBAR_MUTED,
                  font=T.font(6, "bold"), anchor="w").pack(anchor="w", pady=(0, 6))
-        langs = tk.Frame(bottom, bg=T.SIDEBAR)
-        langs.pack(anchor="w")
+        prefs = tk.Frame(bottom, bg=T.SIDEBAR)
+        prefs.pack(anchor="w")
+        langs = tk.Frame(prefs, bg=T.SIDEBAR)
+        langs.pack(side="left")
         self._lang_buttons = {}
         # Two columns: Spanish/Japanese on the left, English/Chinese on the
         # right. Chinese sits directly under English and Japanese under Spanish.
@@ -103,6 +105,19 @@ class Sidebar(tk.Frame):
                 )
                 b.pack(fill="x", pady=(0, 3))
                 self._lang_buttons[code] = b
+        theme_box = tk.Frame(prefs, bg=T.SIDEBAR)
+        theme_box.pack(side="left", anchor="n", padx=(9, 0))
+        self._theme_buttons = {}
+        current_theme = self.app.store.get("theme", "day")
+        for mode, icon in (("day", "sun"), ("night", "moon")):
+            b = IconButton(
+                theme_box, icon, lambda m=mode: self.app.set_theme(m), size=25,
+                icon_size=14, bg=T.SIDEBAR, fg=T.SIDEBAR_MUTED,
+                hover_bg=T.SIDEBAR_HOVER, active=current_theme == mode,
+                tooltip=self.t(f"theme.{mode}"),
+            )
+            b.pack(side="left", padx=1, pady=(0, 3))
+            self._theme_buttons[mode] = b
         tk.Label(bottom, text=self.t("brand.version", v=self.app.version), bg=T.SIDEBAR,
                  fg=T.SIDEBAR_MUTED, font=T.font(7), anchor="w").pack(anchor="w", pady=(14, 1))
         tk.Label(bottom, text=self.t("brand.footer"), bg=T.SIDEBAR, fg=T.SIDEBAR_MUTED,
@@ -122,6 +137,7 @@ class TposeApp:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.store = Store()
+        T.set_theme(self.store.get("theme", "day"))
         T.set_language_font(self.store.lang)
         self.art = Artwork()
         self.folder_cache: dict[str, list[Path]] = {}
@@ -146,6 +162,12 @@ class TposeApp:
         try:
             self.root.iconbitmap(default=str(asset("ui", "icon.ico")))
         except tk.TclError:
+            pass
+        try:
+            icon = Image.open(asset("ui", "icon.png")).convert("RGBA")
+            self._window_icon = ImageTk.PhotoImage(icon)
+            self.root.iconphoto(True, self._window_icon)
+        except Exception:
             pass
         sw, sh = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
         left, top, aw, ah = self._work_area(sw, sh)
@@ -291,6 +313,14 @@ class TposeApp:
         current = list(LANGUAGES).index(self.lang) if self.lang in LANGUAGES else 0
         self.set_language(LANGUAGES[(current + 1) % len(LANGUAGES)])
 
+    def set_theme(self, mode: str):
+        if mode not in ("day", "night") or mode == self.store.get("theme", "day"):
+            return
+        self.store.set("theme", mode)
+        T.set_theme(mode)
+        self.root.configure(bg=T.CREAM)
+        self._build_shell()
+
     # -------------------------------------------------------------- helpers
     def folder_files(self, path: str) -> list[Path]:
         if not path:
@@ -362,7 +392,7 @@ class TposeApp:
                 self.root.after_cancel(self._toast_after)
             except tk.TclError:
                 pass
-        label = tk.Label(self.root, text=text, bg=T.INK, fg=T.SESSION_TEXT, font=T.font(9, "bold"),
+        label = tk.Label(self.root, text=text, bg=T.SIDEBAR, fg=T.SESSION_TEXT, font=T.font(9, "bold"),
                          padx=15, pady=8)
         label.place(relx=0.5, rely=1.0, y=-26, anchor="s")
         label.lift()

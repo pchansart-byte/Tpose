@@ -47,7 +47,9 @@ copia la carpeta completa.
 - El nombre de la carpeta de la imagen actual aparece discretamente en la esquina inferior izquierda.
 - **Aviso antes del final**: elige con el desplegable en qué segundo (de 5 en 5 hasta 30) empieza a sonar el timbre. El número del contador parpadea sincronizado con cada aviso.
 - **Timbre cada 30 s**: opción para oír un aviso mientras avanza la sesión.
-- Mezclar, blanco y negro, sonidos, mostrar/ocultar reloj, pantalla completa.
+- **Orden de imágenes**: desplegable **Mezclar / Ordenado** para activar o detener la aleatoriedad.
+- **Tema día / noche** con botones de sol y luna; el modo noche usa tonos fríos y guarda la preferencia.
+- Blanco y negro, sonidos, mostrar/ocultar reloj, pantalla completa.
 - Pausa, imagen anterior/siguiente y resumen al terminar.
 
 ### Historial
@@ -55,6 +57,8 @@ copia la carpeta completa.
 - Gráfico de los últimos 7 días.
 - **Borrar todo el historial** cuando quieras.
 - **Exportar las estadísticas como imagen PNG** o como **Excel (.xlsx)**.
+- Cada sesión muestra también la **lista de carpetas** utilizadas, además del número.
+- En los bloques no hay límite de imágenes: si pides más de las disponibles, solo se avisa de que se repetirán.
 
 ### Español, English, 中文 y 日本語
 Cambia el idioma desde la barra lateral, antes de empezar la sesión. Chino y japonés aparecen debajo de inglés y español respectivamente.

@@ -107,11 +107,7 @@ def make_sequence(
     if not files or not durations:
         return [], []
     usage = usage or {}
-    enabled_folders = sum(
-        1 for f in folders
-        if f.get("enabled", True) and Path(str(f.get("path", ""))).is_dir()
-    )
-    do_shuffle = shuffle or enabled_folders > 1
+    do_shuffle = bool(shuffle)
     cutoff = int(session_id) - max(0, int(avoid_sessions))
     eligible = []
     fallback = []

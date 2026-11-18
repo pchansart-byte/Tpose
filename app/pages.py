@@ -50,7 +50,8 @@ class Page(tk.Frame):
         return photo
 
 
-def section_head(parent, number: str, title: str, note: str = "", bg=T.CREAM):
+def section_head(parent, number: str, title: str, note: str = "", bg: str | None = None):
+    bg = bg or T.CREAM
     row = tk.Frame(parent, bg=bg)
     num = tk.Label(row, text=number, bg=bg, fg=T.ACCENT, font=T.font(9, "bold"))
     num.pack(side="left", anchor="n", pady=(3, 0))
@@ -383,7 +384,14 @@ class SetupPage(Page):
             self.t("common.save"), self.t("common.cancel"),
             self.t("dialog.block_invalid"), count, duration,
             count_unit=self.t("common.poses"),
+            available_images=self._available_image_count(),
         ).show()
+
+    def _available_image_count(self) -> int:
+        total = 0
+        for path in self.store.selected_folder_paths():
+            total += len(self.app.folder_files(path))
+        return total
 
     def _add_block(self):
         values = self._block_dialog(self.t("dialog.block_add_title"), 5, 60)
@@ -435,21 +443,31 @@ class SetupPage(Page):
         section_head(box, "04", self.t("practice.step4")).pack(fill="x", pady=(0, 7))
         grid = tk.Frame(box, bg=T.CREAM)
         grid.pack(fill="x")
+        order = tk.Frame(grid, bg=T.CREAM)
+        order.grid(row=0, column=0, sticky="w", pady=(2, 4))
+        tk.Label(order, text=self.t("settings.order"), bg=T.CREAM, fg=T.INK,
+                 font=T.font(9, "bold")).pack(side="left", padx=(0, 6))
+        order_text = self.t("settings.shuffle" if self.store.get("shuffle") else "settings.ordered")
+        self.order_btn = CanvasButton(
+            order, order_text + "  ▾",
+            self._open_order_menu, variant="ghost", width=90, height=28, radius=8,
+            font_size=8, padx=6, tooltip=self.t("settings.order_desc"),
+        )
+        self.order_btn.pack(side="left")
+
         opts = [
-            ("shuffle", "settings.shuffle", "settings.shuffle_desc"),
             ("grayscale", "settings.grayscale", "settings.grayscale_desc"),
             ("sound", "settings.sound", "settings.sound_desc"),
         ]
         if self.store.get("mode") == "timed":
             opts.append(("show_timer", "settings.show_timer", "settings.show_timer_desc"))
-        for i, (key, title, desc) in enumerate(opts):
+        for i, (key, title, desc) in enumerate(opts, 1):
             row = ToggleRow(
                 grid, self.t(title), "", bool(self.store.get(key)),
                 lambda v, k=key: self.store.set(k, bool(v)), bg=T.CREAM,
                 tooltip_text=self.t(desc),
             )
-            row.grid(row=0, column=i, sticky="w", padx=(0 if i == 0 else 7, 0),
-                     pady=(2, 4))
+            row.grid(row=0, column=i, sticky="w", padx=(7, 0), pady=(2, 4))
         for i in range(4):
             grid.grid_columnconfigure(i, weight=1, uniform="opt")
 
@@ -492,6 +510,27 @@ class SetupPage(Page):
     def _set_warning(self, seconds):
         self.store.set("warning_seconds", int(seconds))
         self.warning_btn.set_text(f"{int(seconds)} s  ▾")
+
+    def _open_order_menu(self):
+        menu = tk.Menu(self, tearoff=0, bg=T.PAPER, fg=T.INK,
+                       activebackground=T.ACCENT_SOFT, activeforeground=T.INK,
+                       font=T.font(9), bd=0)
+        menu.add_command(label=self.t("settings.shuffle"),
+                         command=lambda: self._set_shuffle(True))
+        menu.add_command(label=self.t("settings.ordered"),
+                         command=lambda: self._set_shuffle(False))
+        self._order_menu = menu
+        x = self.order_btn.winfo_rootx()
+        y = self.order_btn.winfo_rooty() + self.order_btn.winfo_height()
+        try:
+            menu.tk_popup(x, y)
+        finally:
+            menu.grab_release()
+
+    def _set_shuffle(self, value: bool):
+        self.store.set("shuffle", bool(value))
+        text = self.t("settings.shuffle" if value else "settings.ordered")
+        self.order_btn.set_text(text + "  ▾")
 
     # ---------------------------------------------------------------- summary
     def _build_summary(self):
@@ -669,7 +708,8 @@ class SetupPage(Page):
 
 
 class WeeklyChart(tk.Canvas):
-    def __init__(self, parent, bg=T.CARD):
+    def __init__(self, parent, bg: str | None = None):
+        bg = bg or T.CARD
         super().__init__(parent, height=168, bg=bg, highlightthickness=0, bd=0)
         self._data = []
         self._bg = bg
@@ -819,7 +859,7 @@ class HistoryPage(Page):
         return plan_label(entry.get("plan") or [], self.lang)
 
     def _row(self, parent, entry, index):
-        bg = T.CARD if index % 2 == 0 else "#F7F2E9"
+        bg = T.CARD if index % 2 == 0 else T.ROW_ALT
         row = tk.Frame(parent, bg=bg, padx=14, pady=9)
         row.pack(fill="x")
         left = tk.Frame(row, bg=bg, width=180)
@@ -837,6 +877,9 @@ class HistoryPage(Page):
         tk.Label(mid, text=f"{T.images_label(int(entry.get('poses', 0)), self.lang)} · "
                             f"{T.fmt_total(entry.get('total_seconds', 0), self.lang)}",
                  bg=bg, fg=T.MUTED, font=T.font(8), anchor="w").pack(anchor="w")
+        if folders:
+            tk.Label(mid, text=" · ".join(folders), bg=bg, fg=T.FAINT, font=T.font(7),
+                     anchor="w", justify="left", wraplength=620).pack(anchor="w", pady=(2, 0))
         done = bool(entry.get("completed"))
         tk.Label(row, text=self.t("history.completed") if done else self.t("history.interrupted"),
                  bg=T.GREEN_SOFT if done else T.ACCENT_SOFT,

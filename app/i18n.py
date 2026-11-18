@@ -1284,10 +1284,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "ja": "ブロック合計",
     },
     "dialog.block_invalid": {
-        "es": "Introduce entre 1 y 500 imágenes y entre 5 s y 60 min por imagen.",
-        "en": "Enter 1–500 images and 5 s–60 min per image.",
-        "zh": "请输入 1 到 500 张图片，每张 5 秒到 60 分钟。",
-        "ja": "画像数は 1〜500、1 枚あたり 5 秒〜60 分で入力してください。",
+        "es": "Introduce al menos 1 imagen y entre 5 s y 60 min por imagen.",
+        "en": "Enter at least 1 image and 5 s–60 min per image.",
+        "zh": "请输入至少 1 张图片，每张 5 秒到 60 分钟。",
+        "ja": "画像数は 1 以上、1 枚あたり 5 秒〜60 分で入力してください。",
     },
     "dialog.relaxed_invalid": {
         "es": "Introduce entre 1 y 500 imágenes.",
@@ -1372,6 +1372,42 @@ STRINGS: dict[str, dict[str, str]] = {
         "en": "日本語",
         "zh": "日本語",
         "ja": "日本語",
+    },
+    "settings.order": {
+        "es": "Orden",
+        "en": "Order",
+        "zh": "顺序",
+        "ja": "順序",
+    },
+    "settings.ordered": {
+        "es": "Ordenado",
+        "en": "Ordered",
+        "zh": "按顺序",
+        "ja": "順番",
+    },
+    "settings.order_desc": {
+        "es": "Mezclar las imágenes o seguir el orden de las carpetas.",
+        "en": "Shuffle images or follow folder order.",
+        "zh": "随机打乱图片，或按文件夹顺序播放。",
+        "ja": "画像をシャッフルするか、フォルダー順に再生します。",
+    },
+    "theme.day": {
+        "es": "Modo día",
+        "en": "Day mode",
+        "zh": "日间模式",
+        "ja": "デイモード",
+    },
+    "theme.night": {
+        "es": "Modo noche",
+        "en": "Night mode",
+        "zh": "夜间模式",
+        "ja": "ナイトモード",
+    },
+    "dialog.block_over_available": {
+        "es": "Hay {n} imágenes disponibles. Si el bloque pide más, se repetirán.",
+        "en": "There are {n} available images. If the block asks for more, they will repeat.",
+        "zh": "当前只有 {n} 张可用图片；区块数量超过时会重复使用。",
+        "ja": "利用できる画像は {n} 枚です。ブロックの枚数が多い場合は繰り返されます。",
     },
 }
 

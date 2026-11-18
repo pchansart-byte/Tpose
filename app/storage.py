@@ -20,6 +20,7 @@ DEFAULT_PLAN = [
 DEFAULT_CONFIG: dict[str, Any] = {
     "version": 2,
     "lang": "es",
+    "theme": "day",
     "mode": "timed",
     "folders": [],
     "plan": DEFAULT_PLAN,
@@ -117,6 +118,8 @@ class Store:
     def _validate(self) -> None:
         if self.data["lang"] not in LANGUAGES:
             self.data["lang"] = "es"
+        if self.data.get("theme") not in ("day", "night"):
+            self.data["theme"] = "day"
         if self.data["mode"] not in ("timed", "relaxed"):
             self.data["mode"] = "timed"
         if self.data["rotation"] not in (0, 90, 180, 270):

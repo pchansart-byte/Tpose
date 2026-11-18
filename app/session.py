@@ -304,7 +304,7 @@ class SessionScreen(tk.Frame):
         self.bottom_meta.pack(anchor="w")
 
         controls = tk.Frame(inner, bg=T.SESSION_PANEL)
-        controls.grid(row=0, column=1, pady=8)
+        controls.place(relx=0.5, rely=0.55, anchor="center")
         self.prev_btn = IconButton(
             controls, "prev", self._previous, size=38, icon_size=17, bg=T.SESSION_PANEL,
             fg=T.SESSION_MUTED, hover_bg=T.SESSION_PANEL_2, tooltip=self.t("session.prev"),
@@ -312,7 +312,7 @@ class SessionScreen(tk.Frame):
         self.prev_btn.pack(side="left", padx=5)
         self.pause_btn = CircleButton(
             controls, "pause", self._toggle_pause, size=50, icon_size=20,
-            fill=T.ACCENT, hover=T.ACCENT_DARK, fg=T.WHITE, bg=T.SESSION_PANEL,
+            fill=T.ACCENT, hover=T.ACCENT_HOVER, fg=T.WHITE, bg=T.SESSION_PANEL,
             tooltip=self.t("session.pause"),
         )
         self.pause_btn.pack(side="left", padx=8)
@@ -681,7 +681,7 @@ class SessionScreen(tk.Frame):
         x = (w - pw) // 2
         y = 78 + (h - 78 - 92 - ph) // 2
         self.stage.create_rectangle(x - 1, y - 1, x + pw + 1, y + ph + 1,
-                                    outline="#39312A", width=1)
+                                    outline=T.SESSION_LINE, width=1)
         self.stage.create_image(x, y, image=photo, anchor="nw")
 
     def _render_current(self):

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import tkinter as tk
 import tkinter.font as tkfont
 from typing import Callable
@@ -120,6 +121,24 @@ def draw_icon(canvas: tk.Canvas, name: str, cx: float, cy: float, size: float, c
                            outline=color, width=w)
         canvas.create_arc(cx - s * 0.68, cy - s * 0.68, cx + s * 0.68, cy + s * 0.68,
                           start=90, extent=-180, style="chord", fill=color, outline=color)
+    elif name == "sun":
+        canvas.create_oval(cx - s * 0.34, cy - s * 0.34, cx + s * 0.34, cy + s * 0.34,
+                           outline=color, width=w)
+        for deg in range(0, 360, 45):
+            angle = math.radians(deg)
+            x1, y1 = cx + math.cos(angle) * s * 0.52, cy + math.sin(angle) * s * 0.52
+            x2, y2 = cx + math.cos(angle) * s * 0.78, cy + math.sin(angle) * s * 0.78
+            line(x1, y1, x2, y2, **kw)
+    elif name == "moon":
+        outer, inner = [], []
+        for deg in range(35, 321):
+            angle = math.radians(deg)
+            outer.append((cx + math.cos(angle) * s * 0.76, cy + math.sin(angle) * s * 0.76))
+        for deg in reversed(range(35, 321)):
+            angle = math.radians(deg)
+            inner.append((cx + s * 0.26 + math.cos(angle) * s * 0.66,
+                          cy + math.sin(angle) * s * 0.66))
+        canvas.create_polygon(outer + inner, fill=color, outline="")
     elif name == "rotate":
         canvas.create_arc(cx - s * 0.64, cy - s * 0.64, cx + s * 0.64, cy + s * 0.64,
                           start=36, extent=286, style="arc", outline=color, width=w)
@@ -317,7 +336,17 @@ class CanvasButton(tk.Canvas):
         self.delete("all")
         h = max(2, self.winfo_height() or self._height)
         w = max(2, self.winfo_width() or self._cw or self._min_width)
-        fill, fg, hover, fg_hover, outline = self.PALETTES.get(self._variant, self.PALETTES["primary"])
+        palettes = {
+            "primary": (T.ACCENT, T.WHITE, T.ACCENT_HOVER, T.WHITE, ""),
+            "dark": (T.SIDEBAR, T.SESSION_TEXT, T.SIDEBAR_HOVER, T.SESSION_TEXT, ""),
+            "secondary": (T.PAPER, T.INK, T.CREAM_DARK, T.INK, T.LINE_STRONG),
+            "ghost": (T.CREAM, T.INK, T.CREAM_DARK, T.INK, T.LINE),
+            "quiet": ("", T.MUTED, T.CREAM_DARK, T.INK, ""),
+            "danger": (T.RED, T.WHITE, T.ACCENT_HOVER, T.WHITE, ""),
+            "accent_soft": (T.ACCENT_SOFT, T.ACCENT_DARK, T.ACCENT_SOFT, T.ACCENT_DARK, ""),
+            "sidebar": (T.SIDEBAR_HOVER, T.SIDEBAR_TEXT, T.SIDEBAR_ACTIVE, T.SESSION_TEXT, ""),
+        }
+        fill, fg, hover, fg_hover, outline = palettes.get(self._variant, palettes["primary"])
         if self._variant == "quiet":
             fill_eff, fg_eff = (hover if (self._hover or self._focus) else self._bg), (fg_hover if (self._hover or self._focus) else fg)
         elif self._variant == "secondary" and self._hover:
@@ -572,7 +601,7 @@ class ToggleSwitch(tk.Canvas):
         track = T.GREEN if on else (T.LINE_STRONG if self._hover else T.LINE)
         round_rect(self, 1, 1, 43, 23, 11, track, "")
         x = 33 if on else 11
-        self.create_oval(x - 8, 4, x + 8, 20, fill=T.WHITE, outline="#C9BCAD")
+        self.create_oval(x - 8, 4, x + 8, 20, fill=T.WHITE, outline=T.LINE_STRONG)
 
 
 class ToggleRow(tk.Frame):
@@ -739,9 +768,9 @@ class Tooltip:
         y = self.widget.winfo_rooty() + self.widget.winfo_height() + 8
         tip = tk.Toplevel(self.widget)
         tip.wm_overrideredirect(True)
-        tip.configure(bg=T.INK)
+        tip.configure(bg=T.SIDEBAR)
         label = tk.Label(
-            tip, text=self.text, bg=T.INK, fg=T.SESSION_TEXT, font=T.font(8),
+            tip, text=self.text, bg=T.SIDEBAR, fg=T.SESSION_TEXT, font=T.font(8),
             padx=9, pady=5,
         )
         label.pack()

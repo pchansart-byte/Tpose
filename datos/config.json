@@ -1,26 +1,19 @@
 {
   "version": 2,
   "lang": "es",
+  "theme": "night",
   "mode": "timed",
   "folders": [
     {
-      "path": "D:\\referencias\\Thicc",
-      "name": "Thicc",
+      "path": "D:\\referencias\\referencias normales\\cuadros",
+      "name": "cuadros",
       "enabled": true
     }
   ],
   "plan": [
     {
-      "count": 500,
-      "duration": 10
-    },
-    {
-      "count": 3,
-      "duration": 120
-    },
-    {
-      "count": 4,
-      "duration": 240
+      "count": 5,
+      "duration": 60
     }
   ],
   "relaxed_count": 20,
@@ -31,7 +24,7 @@
   "interval_sound": true,
   "show_timer": true,
   "sound": true,
-  "session_seq": 14,
+  "session_seq": 17,
   "image_usage": {
     "D:\\referencias\\clued\\GxVt4MxbwAAqpVS.jpeg": 1,
     "D:\\referencias\\oral\\GUfQvnnbcAAPxur.jpeg": 1,
@@ -157,9 +150,76 @@
     "D:\\referencias\\Thicc\\G2QrcxGWQAAApSQ.jpg": 13,
     "D:\\referencias\\Thicc\\photo_4947725638810930396_y.jpg": 14,
     "D:\\referencias\\Thicc\\HQd0mcfXoAAAwYK.jpg": 14,
-    "D:\\referencias\\Thicc\\F0Ncj7OWIAoJRGD.jpg": 14
+    "D:\\referencias\\Thicc\\F0Ncj7OWIAoJRGD.jpg": 14,
+    "D:\\referencias\\Thicc\\HExjwVla0AAGSpc.jpg": 15,
+    "D:\\referencias\\Thicc\\photo_2_2025-08-20_19-27-42.jpg": 15,
+    "D:\\referencias\\Thicc\\HMBt_B0XQAAfm8o.jpg": 15,
+    "D:\\referencias\\Thicc\\G-hryEsW4AAHt0K.jpg": 15,
+    "D:\\referencias\\Thicc\\photo_12_2025-08-20_19-25-42.jpg": 15,
+    "D:\\referencias\\referencias normales\\cuadros\\eab7456126b30f218a02853f4cd4a64e.jpg": 16,
+    "D:\\referencias\\referencias normales\\cuadros\\HHXFbvRawAAcaXC.jpg": 16,
+    "D:\\referencias\\referencias normales\\cuadros\\G9ND-IkWcAABfye.jpg": 17
   },
   "history": [
+    {
+      "date": "2026-11-17T22:22:40-05:00",
+      "mode": "timed",
+      "folders": [
+        "cuadros"
+      ],
+      "plan": [
+        {
+          "count": 5,
+          "duration": 60
+        }
+      ],
+      "poses": 1,
+      "total_seconds": 8,
+      "planned_seconds": 300,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T22:10:28-05:00",
+      "mode": "timed",
+      "folders": [
+        "cuadros"
+      ],
+      "plan": [
+        {
+          "count": 5,
+          "duration": 60
+        }
+      ],
+      "poses": 2,
+      "total_seconds": 60,
+      "planned_seconds": 300,
+      "completed": false
+    },
+    {
+      "date": "2026-11-17T21:57:57-05:00",
+      "mode": "timed",
+      "folders": [
+        "Thicc"
+      ],
+      "plan": [
+        {
+          "count": 500,
+          "duration": 10
+        },
+        {
+          "count": 3,
+          "duration": 120
+        },
+        {
+          "count": 4,
+          "duration": 240
+        }
+      ],
+      "poses": 5,
+      "total_seconds": 19,
+      "planned_seconds": 6320,
+      "completed": false
+    },
     {
       "date": "2026-11-17T21:31:12-05:00",
       "mode": "timed",

@@ -16,6 +16,7 @@ class BaseDialog(tk.Toplevel):
         self.withdraw()
         self._parent = parent
         self.lang = getattr(parent, "lang", "es")
+        self.t = getattr(parent, "t", lambda key, **kwargs: key)
         self._result = None
         self.overrideredirect(True)
         self.configure(bg=T.CARD)
@@ -175,9 +176,11 @@ class PlanBlockDialog(BaseDialog):
         count: int = 5,
         duration: int = 60,
         count_unit: str = "imágenes",
+        available_images: int = 0,
     ):
         super().__init__(parent, title, width=470)
         self.invalid_text = invalid_text
+        self.available_images = max(0, int(available_images))
         self._count = tk.StringVar(value=str(count))
         self._mins = tk.StringVar(value=str(duration // 60))
         self._secs = tk.StringVar(value=str(duration % 60))
@@ -190,7 +193,7 @@ class PlanBlockDialog(BaseDialog):
         box.pack(fill="x", pady=(4, 12))
         self.count_entry = tk.Entry(
             box, textvariable=self._count, bg=T.PAPER, fg=T.INK, insertbackground=T.ACCENT,
-            relief="flat", font=T.font(15, "bold"), justify="center", width=7,
+            relief="flat", font=T.font(15, "bold"), justify="center", width=10,
             highlightthickness=0, bd=0,
         )
         self.count_entry.pack(side="left", fill="x", expand=True, padx=(12, 4), pady=8)
@@ -218,8 +221,11 @@ class PlanBlockDialog(BaseDialog):
         self.total = tk.Label(self.content, text="", bg=T.ACCENT_PALE, fg=T.ACCENT_DARK,
                               font=T.font(9, "bold"), anchor="w", padx=12, pady=8)
         self.total.pack(fill="x", pady=(14, 0))
+        self.warning = tk.Label(self.content, text="", bg=T.CARD, fg=T.AMBER,
+                                font=T.font(8), anchor="w", justify="left", wraplength=400)
+        self.warning.pack(fill="x", pady=(6, 0))
         self.error = tk.Label(self.content, text="", bg=T.CARD, fg=T.RED, font=T.font(8), anchor="w")
-        self.error.pack(fill="x", pady=(6, 0))
+        self.error.pack(fill="x", pady=(4, 0))
         self.add_buttons(cancel_text, confirm_text)
         self.bind("<Return>", lambda e: self._confirm())
         self.after(60, self._focus_count)
@@ -257,7 +263,7 @@ class PlanBlockDialog(BaseDialog):
             duration = minutes * 60 + seconds
         except ValueError:
             return None
-        if not (1 <= count <= 500) or not (5 <= duration <= 3600):
+        if count < 1 or not (5 <= duration <= 3600):
             return None
         return count, duration
 
@@ -269,6 +275,12 @@ class PlanBlockDialog(BaseDialog):
         count, duration = values
         total = count * duration
         self.total.configure(text=f"{count} × {T.fmt_chip_duration(duration, self.lang)} = {T.fmt_total(total, self.lang)}")
+        if count > self.available_images:
+            self.warning.configure(
+                text=self.t("dialog.block_over_available", n=self.available_images)
+            )
+        else:
+            self.warning.configure(text="")
 
     def _confirm(self):
         values = self._values()
